@@ -86,7 +86,6 @@ TokenType classificar(const char* palavra) {
 }
 
 void quebrarTokens(char* linha, Token* tokens, int* count) {
-    // Identifica posição do comentário
     char* comentarioInicio = strchr(linha, '#');
     char linhaSemComentario[256] = "";
 
@@ -95,7 +94,6 @@ void quebrarTokens(char* linha, Token* tokens, int* count) {
         strncpy(linhaSemComentario, linha, pos);
         linhaSemComentario[pos] = '\0';
 
-        // Armazena o comentário
         char comentario[256];
         strcpy(comentario, comentarioInicio);
         if (!tokenJaExiste(tokens, *count, comentario)) {
@@ -109,7 +107,6 @@ void quebrarTokens(char* linha, Token* tokens, int* count) {
 
     int i = 0;
     while (linhaSemComentario[i]) {
-        // Verifica operadores compostos
         if (linhaSemComentario[i + 1]) {
             char dois[3] = {linhaSemComentario[i], linhaSemComentario[i + 1], '\0'};
             if (ehOperadorComposto(dois)) {
